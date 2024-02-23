@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-error';
-import tweetsRoute from './router/tweets'
+import tweetsRoute from './router/tweets.js'
 
 const app = express();
 
