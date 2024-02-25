@@ -21,8 +21,8 @@ export function getAll() {
   return tweets;
 }
 
-export function gettAllByUsername(username) {
-  return tweets.fillter((tweet) => tweet.username == username);
+export function getAllByUsername(username) {
+  return tweets.filter((tweet) => tweet.username == username);
 }
 
 export function getById(id) {
@@ -49,5 +49,5 @@ export function update(id, text) {
 }
 
 export function remove(id) {
-  tweets.filter((tweet) => tweet.id != id);
+  return tweets.filter((tweet) => tweet.id != id);
 }
