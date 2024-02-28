@@ -1,63 +1,37 @@
 export default class TweetService {
-  constructor(baseURL) {
-    this.baseURL = 'http://localhost:8080';
+  constructor(http) {
+    this.http = http;
   }
 
   async getTweets(username) {
     let query = username ? `?username=${username}` : '';
-    console.log(`${this.baseURL}/tweets${query}`);
-    const response = await fetch(`${this.baseURL}/tweets${query}`, {
+    return this.http.fetch(`/tweets${query}`, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
     });
-
-    console.log(query);
-    const data = await response.json();
-    if (response.status !== 200) {
-      throw new Error(data.message);
-    }
-    return data;
   }
 
   async postTweet(text) {
-    const response = await fetch(`${this.baseURL}/tweets/`, {
+    return this.http.fetch(`/tweets/`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         text,
-        username: 'ellie',
-        name: 'Ellie',
+        username: 'jihye',
+        name: 'Jihye',
       }),
     });
-    const data = await response.json();
-    if (response.status !== 201) {
-      throw new Error(data.message);
-    }
-    console.log(data);
-    return data;
   }
 
   async deleteTweet(tweetId) {
-    const response = await fetch(`${this.baseURL}/tweets/${tweetId}`, {
+    return this.http.fetch(`/tweets/${tweetId}`, {
       method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
     });
-    if (response.status !== 204) {
-      const data = await response.json();
-      throw new Error(data.message);
-    }
   }
 
   async updateTweet(tweetId, text) {
-    const response = await fetch(`${this.baseURL}/tweets/${tweetId}`, {
+    return this.http.fetch(`/tweets/${tweetId}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
     });
-    const data = await response.json();
-    if (response.status !== 200) {
-      throw new Error(data.message);
-    }
-    return data;
+
   }
 }
